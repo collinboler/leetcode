@@ -10,15 +10,24 @@
 class Solution {
 
     public void printLinkedListInReverse(ImmutableListNode head) {
-        Stack<ImmutableListNode> stack = new Stack<>();
-        ImmutableListNode node = head;
-        while (node != null) {
-            stack.push(node);
-            node = node.getNext();
+        // brute force with stack
+        // Stack<ImmutableListNode> stack = new Stack<>();
+        // ImmutableListNode node = head;
+        // while (node != null) {
+        //     stack.push(node);
+        //     node = node.getNext();
+        // }
+        // while (!stack.isEmpty()) {
+        //     node = stack.pop();
+        //     node.printValue();
+        // }
+
+        // recursive
+        if (head != null) {
+            printLinkedListInReverse(head.getNext());
+            head.printValue();
         }
-        while (!stack.isEmpty()) {
-            node = stack.pop();
-            node.printValue();
-        }
+
+
     }
 }
