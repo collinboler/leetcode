@@ -14,6 +14,6 @@ class Solution(object):
             else:
                 map[nums[i]] = i
         
-        return ""
+        
         
         
