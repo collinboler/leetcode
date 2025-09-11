@@ -5,17 +5,12 @@ class Solution(object):
         :type k: int
         :rtype: float
         """
-        left = 0
-        curr = 0
-        answer = float('-inf')
+       
+        curr = sum(nums[:k])
+        answer = curr
+        for i in range(k, len(nums)):
+            curr += nums[i ] - nums[i - k]
 
-        for right in range(len(nums)):
-            curr += nums[right]
-            while (right - left) >= k:
-                
-                curr -= nums[left]
-                left += 1
-            if (right - left + 1) == k:
-                answer = max(answer, curr)
+            answer = max(answer, curr)
         
-        return float(answer) / float(k)
+        return float(answer) / k 
