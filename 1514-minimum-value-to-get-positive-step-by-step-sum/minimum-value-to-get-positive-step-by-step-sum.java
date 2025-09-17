@@ -8,7 +8,7 @@ class Solution {
         int min = Integer.MAX_VALUE;
         for (int p : prefixSum) {
             if (p < min) min = p;
-            System.out.println(p);
+           
         }
         if (min < 0){
         return (-1 * min) + 1;
