@@ -1,5 +1,5 @@
 
-class FoodItem {
+class FoodItem implements Comparable<FoodItem> {
     String food;
     String cuisine;
     int rating;
@@ -10,6 +10,13 @@ class FoodItem {
         this.rating = rating;
         this.cuisine = cuisine;
         this.isValid = true;
+    }
+    @Override
+    public int compareTo(FoodItem other) {
+        if (!(this.rating == other.rating)) {
+            return other.rating - rating;
+        }
+        return food.compareTo(other.food);
     }
 }
 class FoodRatings {
@@ -27,9 +34,7 @@ class FoodRatings {
             FoodItem food = new FoodItem(foods[i], ratings[i], cuisines[i]);
             // create new cuisine queue if needed
             if (!map.containsKey(cuisines[i])) {
-                map.put(cuisines[i], new PriorityQueue<>(
-                Comparator.comparingInt((FoodItem f) -> f.rating).reversed().thenComparing(f -> f.food)
-            ));
+                map.put(cuisines[i], new PriorityQueue<FoodItem>());
             } 
             map.get(cuisines[i]).add(food);
             foodToItem.put(foods[i], food);
