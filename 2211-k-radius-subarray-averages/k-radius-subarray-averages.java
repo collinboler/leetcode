@@ -29,7 +29,6 @@ class Solution {
 
         for (int middle = k + 1; middle <= nums.length - k; middle++) {
             if (right > nums.length - 1) break;
-
             curr += (nums[right] - nums[left]);
             solution[middle] = (int)(curr / radius);
             left++;
