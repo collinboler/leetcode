@@ -2,12 +2,14 @@
 class FoodItem {
     String food;
     String cuisine;
-    int rating; 
+    int rating;
+    boolean isValid;
     
     public FoodItem(String food, int rating, String cuisine) {
         this.food = food;
         this.rating = rating;
         this.cuisine = cuisine;
+        this.isValid = true;
     }
 }
 class FoodRatings {
@@ -36,20 +38,26 @@ class FoodRatings {
     
     public void changeRating(String food, int newRating) {
         String cuisine = foodmap.get(food);
-        FoodItem oldf = foodToItem.get(food);
-        foodToItem.remove(food);
+        FoodItem oldF = foodToItem.get(food);
+   
 
-        PriorityQueue<FoodItem> pq = map.get(cuisine);
-        pq.remove(oldf);
+        oldF.isValid = false;
         
         FoodItem newF = new FoodItem(food, newRating, cuisine);
+        PriorityQueue<FoodItem> pq = map.get(cuisine);
         pq.add(newF);
-        foodToItem.put(food, newF);
+        foodToItem.put(food, newF); // update
 
     }
     
     public String highestRated(String cuisine) {
-        FoodItem bestFood = this.map.get(cuisine).peek();
+        PriorityQueue<FoodItem> pq = map.get(cuisine);
+        while (pq.peek().isValid != true) {
+           pq.poll();
+        }
+     
+        FoodItem bestFood = pq.peek();
+        
         return bestFood.food;
     }
 
