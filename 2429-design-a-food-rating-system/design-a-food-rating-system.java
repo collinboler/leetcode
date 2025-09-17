@@ -1,70 +1,73 @@
-class Food implements Comparable<Food> {
-    // Store the food's rating.
-    public int foodRating;
-    // Store the food's name.
-    public String foodName;
 
-    public Food(int foodRating, String foodName) {
-        this.foodRating = foodRating;
-        this.foodName = foodName;
+class FoodItem implements Comparable<FoodItem> {
+    String food;
+    String cuisine;
+    int rating;
+    boolean isValid;
+    
+    public FoodItem(String food, int rating, String cuisine) {
+        this.food = food;
+        this.rating = rating;
+        this.cuisine = cuisine;
+        this.isValid = true;
     }
-
-    // Implement the compareTo method for comparison
     @Override
-    public int compareTo(Food other) {
-        // If food ratings are the same, sort based on their names (lexicographically smaller name food will be on top)
-        if (foodRating == other.foodRating) {
-            return foodName.compareTo(other.foodName);
+    public int compareTo(FoodItem other) {
+        if (!(this.rating == other.rating)) {
+            return other.rating - rating;
         }
-        // Sort based on food rating (bigger rating food will be on top)
-        return -1 * Integer.compare(foodRating, other.foodRating);
+        return food.compareTo(other.food);
     }
 }
-
 class FoodRatings {
-    // Map food with its rating.
-    private Map<String, Integer> foodRatingMap;
-    // Map food with the cuisine it belongs to.
-    private Map<String, String> foodCuisineMap;
     
-    // Store all food of a cuisine in a priority queue (to sort them on ratings/name)
-    // Priority queue element -> Food: (foodRating, foodName)
-    private Map<String, PriorityQueue<Food>> cuisineFoodMap;
-
+    HashMap<String, PriorityQueue<FoodItem>> map;
+    HashMap<String, String> foodmap;
+    HashMap<String, FoodItem> foodToItem;
+    
     public FoodRatings(String[] foods, String[] cuisines, int[] ratings) {
-        foodRatingMap = new HashMap<>();
-        foodCuisineMap = new HashMap<>();
-        cuisineFoodMap = new HashMap<>();
-
-        for (int i = 0; i < foods.length; ++i) {
-            // Store 'rating' and 'cuisine' of the current 'food' in 'foodRatingMap' and 'foodCuisineMap' maps.
-            foodRatingMap.put(foods[i], ratings[i]);
-            foodCuisineMap.put(foods[i], cuisines[i]);
-            // Insert the '(rating, name)' element into the current cuisine's priority queue.
-            cuisineFoodMap.computeIfAbsent(cuisines[i], k -> new PriorityQueue<>()).add(new Food(ratings[i], foods[i]));
+        this.map = new HashMap<>();
+        this.foodmap = new HashMap<>();
+        this.foodToItem = new HashMap<>();
+        for (int i = 0; i < foods.length; i++) {
+            foodmap.put(foods[i], cuisines[i]);
+            FoodItem food = new FoodItem(foods[i], ratings[i], cuisines[i]);
+            // create new cuisine queue if needed
+            if (!map.containsKey(cuisines[i])) {
+                map.put(cuisines[i], new PriorityQueue<FoodItem>());
+            } 
+            map.get(cuisines[i]).add(food);
+            foodToItem.put(foods[i], food);
         }
-    } 
+    }
     
     public void changeRating(String food, int newRating) {
-        // Update food's rating in the 'foodRating' map.
-        foodRatingMap.put(food, newRating);
-        // Insert the '(new food rating, food name)' element into the respective cuisine's priority queue.
-        String cuisineName = foodCuisineMap.get(food);
-        cuisineFoodMap.get(cuisineName).add(new Food(newRating, food));
+        String cuisine = foodmap.get(food);
+        FoodItem oldF = foodToItem.get(food);
+
+        oldF.isValid = false;
+        
+        FoodItem newF = new FoodItem(food, newRating, cuisine);
+        PriorityQueue<FoodItem> pq = map.get(cuisine);
+        pq.add(newF);
+        foodToItem.put(food, newF); // update
     }
     
     public String highestRated(String cuisine) {
-        // Get the highest rated 'food' of 'cuisine'.
-        Food highestRated = cuisineFoodMap.get(cuisine).peek();
-        
-        // If the latest rating of 'food' doesn't match the 'rating' on which it was sorted in the priority queue,
-        // then we discard this element from the priority queue.
-        while (foodRatingMap.get(highestRated.foodName) != highestRated.foodRating) {
-            cuisineFoodMap.get(cuisine).poll();
-            highestRated = cuisineFoodMap.get(cuisine).peek();
+        PriorityQueue<FoodItem> pq = map.get(cuisine);
+        while (pq.peek().isValid != true) {
+           pq.poll();
         }
+     
+        FoodItem bestFood = pq.peek();
         
-        // Return the name of the highest-rated 'food' of 'cuisine'.
-        return highestRated.foodName;
+        return bestFood.food;
     }
 }
+
+/**
+ * Your FoodRatings object will be instantiated and called as such:
+ * FoodRatings obj = new FoodRatings(foods, cuisines, ratings);
+ * obj.changeRating(food,newRating);
+ * String param_2 = obj.highestRated(cuisine);
+ */
