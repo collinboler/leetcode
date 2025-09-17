@@ -1,64 +1,62 @@
-class FoodItem implements Comparable<FoodItem> {
+
+class FoodItem {
     String food;
     String cuisine;
     int rating;
     boolean isValid;
-
-    FoodItem(String food, String cuisine, int rating) {
+    
+    public FoodItem(String food, int rating, String cuisine) {
         this.food = food;
-        this.cuisine = cuisine;
         this.rating = rating;
+        this.cuisine = cuisine;
         this.isValid = true;
     }
-
-    @Override
-    public int compareTo(FoodItem other) {
-        if (this.rating != other.rating) {
-            return other.rating - this.rating; // reverse order
-        } // lexicographical ordering
-        return this.food.compareTo(other.food); // recursive?
-    }
-
 }
-
 class FoodRatings {
-    HashMap<String, PriorityQueue<FoodItem>> map; // cuisine, fooditem pq
-    HashMap<String, FoodItem> foodMap; // food, fooditem
-    HashMap<String, String> foodToCuisine; // food, cuisine
-
-
+    
+    HashMap<String, PriorityQueue<FoodItem>> map;
+    HashMap<String, String> foodmap;
+    HashMap<String, FoodItem> foodToItem;
+    
     public FoodRatings(String[] foods, String[] cuisines, int[] ratings) {
-        map = new HashMap<>();
-        foodMap = new HashMap<>();
-        foodToCuisine = new HashMap<>();
-
+        this.map = new HashMap<>();
+        this.foodmap = new HashMap<>();
+        this.foodToItem = new HashMap<>();
         for (int i = 0; i < foods.length; i++) {
-            FoodItem food = new FoodItem(foods[i], cuisines[i], ratings[i]);
-            foodMap.put(foods[i], food); 
-            foodToCuisine.put(foods[i], cuisines[i]); 
-            if (map.get(cuisines[i]) == null) { // create new pq for cuisine if first
-                PriorityQueue<FoodItem> pq = new PriorityQueue<>();
-                map.put(cuisines[i], pq);
-            }
+            foodmap.put(foods[i], cuisines[i]);
+            FoodItem food = new FoodItem(foods[i], ratings[i], cuisines[i]);
+            // create new cuisine queue if needed
+            if (!map.containsKey(cuisines[i])) {
+                map.put(cuisines[i], new PriorityQueue<>(
+                Comparator.comparingInt((FoodItem f) -> f.rating).reversed().thenComparing(f -> f.food)
+            ));
+            } 
             map.get(cuisines[i]).add(food);
+            foodToItem.put(foods[i], food);
         }
     }
     
     public void changeRating(String food, int newRating) {
-        FoodItem oldF = foodMap.get(food);
+        String cuisine = foodmap.get(food);
+        FoodItem oldF = foodToItem.get(food);
+
         oldF.isValid = false;
         
-        FoodItem newF = new FoodItem(food, foodToCuisine.get(food), newRating); // create new valid food 
-        map.get(foodToCuisine.get(food)).add(newF); // add new valid food to pq
-        foodMap.put(food, newF); // update map
+        FoodItem newF = new FoodItem(food, newRating, cuisine);
+        PriorityQueue<FoodItem> pq = map.get(cuisine);
+        pq.add(newF);
+        foodToItem.put(food, newF); // update
     }
     
     public String highestRated(String cuisine) {
         PriorityQueue<FoodItem> pq = map.get(cuisine);
-        while (!pq.peek().isValid) {
-            pq.poll(); // clean inValid rating at top
+        while (pq.peek().isValid != true) {
+           pq.poll();
         }
-        return pq.peek().food;
+     
+        FoodItem bestFood = pq.peek();
+        
+        return bestFood.food;
     }
 }
 
