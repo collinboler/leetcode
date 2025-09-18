@@ -13,8 +13,7 @@ class Solution {
         
         int min = Integer.MAX_VALUE;
         for (char c : map.keySet()) {
-            if (c != 'o' || c != 'l' )  min = Math.min(map.get(c), min);
-           
+            if (c != 'o' && c != 'l' )  min = Math.min(map.get(c), min);
         }
         
         return Math.min(min, Math.min(map.get('o') / 2, map.get('l') / 2));
