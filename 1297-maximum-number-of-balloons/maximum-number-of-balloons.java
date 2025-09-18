@@ -10,10 +10,7 @@ class Solution {
             if (map.containsKey(c)) map.put(c, map.get(c) + 1);
         }
         
-        for (char i : map.keySet()) {
-            System.out.println(i + " " + map.get(i));
- 
-        }
+        
         int min = Integer.MAX_VALUE;
         for (char c : map.keySet()) {
             if (c != 'o' || c != 'l' )  min = Math.min(map.get(c), min);
