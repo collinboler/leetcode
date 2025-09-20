@@ -3,8 +3,6 @@ class Spreadsheet {
     public Spreadsheet(int rows) {
         map = new HashMap<>();
         // initialize
-
-    
     for (char c = 'A'; c <= 'Z'; c++) {
         for (int i = 1; i <= rows; i++) {
             StringBuilder sb = new StringBuilder();
@@ -56,11 +54,8 @@ class Spreadsheet {
     if (varTwoL) value2 = map.get(val2);
     else {
         value2 = Integer.parseInt(val2);
-
     }
     return value1 + value2;
-
-    
     }
 }
 
