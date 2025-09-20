@@ -2,18 +2,8 @@ class Spreadsheet {
     HashMap<String, Integer> map;
     public Spreadsheet(int rows) {
         map = new HashMap<>();
-        // initialize
-    // for (char c = 'A'; c <= 'Z'; c++) {
-    //     for (int i = 1; i <= rows; i++) {
-    //         StringBuilder sb = new StringBuilder();
-    //         sb.append(String.valueOf(c)); 
-    //         sb.append(String.valueOf(i));
-    //         map.put(sb.toString(), 0); // initalize to 0
-    //     }
-    // }
     }
     
-
     public void setCell(String cell, int value) {
         map.put(cell, value);
     }
