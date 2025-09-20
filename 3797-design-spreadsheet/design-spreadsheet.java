@@ -3,14 +3,14 @@ class Spreadsheet {
     public Spreadsheet(int rows) {
         map = new HashMap<>();
         // initialize
-    for (char c = 'A'; c <= 'Z'; c++) {
-        for (int i = 1; i <= rows; i++) {
-            StringBuilder sb = new StringBuilder();
-            sb.append(String.valueOf(c)); 
-            sb.append(String.valueOf(i));
-            map.put(sb.toString(), 0); // initalize to 0
-        }
-    }
+    // for (char c = 'A'; c <= 'Z'; c++) {
+    //     for (int i = 1; i <= rows; i++) {
+    //         StringBuilder sb = new StringBuilder();
+    //         sb.append(String.valueOf(c)); 
+    //         sb.append(String.valueOf(i));
+    //         map.put(sb.toString(), 0); // initalize to 0
+    //     }
+    // }
     }
     
 
@@ -39,7 +39,8 @@ class Spreadsheet {
     i++;
     String val1 = sb.toString();
     if (Character.isLetter(formula.charAt(1))) {
-        value1 = map.get(val1);
+        if (map.get(val1) == null) value1 = 0;
+        else value1 = map.get(val1);
     }
     else value1 = Integer.parseInt(val1);
     // second var
@@ -51,7 +52,11 @@ class Spreadsheet {
         i++;
     }
     String val2 = sb2.toString();
-    if (varTwoL) value2 = map.get(val2);
+    if (varTwoL) {
+        if (map.get(val2) == null) value2 = 0;
+        else value2 = map.get(val2);
+    }
+    
     else {
         value2 = Integer.parseInt(val2);
     }
