@@ -39,7 +39,6 @@ class Spreadsheet {
         i++;
     }
     i++;
-    
     String val1 = sb.toString();
     if (Character.isLetter(formula.charAt(1))) {
         System.out.println(formula.charAt(1));
@@ -50,9 +49,7 @@ class Spreadsheet {
     // second var
     StringBuilder sb2 = new StringBuilder();
     boolean varTwoL = false;
-    System.out.println("yo: " + formula.charAt(i));
     if (Character.isLetter(formula.charAt(i))) varTwoL = true;
-    System.out.println(varTwoL);
     while(i < formula.length()) {
         sb2.append(formula.charAt(i));
         i++;
@@ -65,10 +62,6 @@ class Spreadsheet {
     }
     return value1 + value2;
 
-    // =A10+123
-    // =123+B10
-    // =123+123
-    // letter case
     
     }
 }
