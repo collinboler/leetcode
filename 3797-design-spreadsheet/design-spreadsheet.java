@@ -41,8 +41,6 @@ class Spreadsheet {
     i++;
     String val1 = sb.toString();
     if (Character.isLetter(formula.charAt(1))) {
-        System.out.println(formula.charAt(1));
-        System.out.println("val1:" + val1);
         value1 = map.get(val1);
     }
     else value1 = Integer.parseInt(val1);
