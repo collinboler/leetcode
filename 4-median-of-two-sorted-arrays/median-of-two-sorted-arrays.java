@@ -13,10 +13,7 @@ class Solution {
         }
         Arrays.sort(merged);
 
-        for (int i : merged) {
-            System.out.println(i);
-        }
-
+     
     
 
         if (merged.length % 2 != 0) return merged[merged.length / 2]; // odd
