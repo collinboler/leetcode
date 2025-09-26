@@ -10,15 +10,15 @@
  */
 class Solution {
     public ListNode reverseList(ListNode head) {
-       ListNode prev = null;
-       ListNode curr = head;
-       while (curr != null) {
-            ListNode nextNode = curr.next; // store real next node
-            curr.next = prev;               // overwrite real next node with previous node
-            prev = curr;                    // overwrite previous placeholder node with current node
-            curr = nextNode;                // set curr = to the real next node and continue traversing the list
-       }
-        return prev;
-
+      ListNode prev = null;
+      ListNode curr = head;
+      while (curr != null) {
+        ListNode next = curr.next;
+        curr.next = prev;
+        prev = curr;
+        curr = next;
+      }
+      return prev;
     }
+    
 }
