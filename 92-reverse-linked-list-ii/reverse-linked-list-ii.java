@@ -17,7 +17,6 @@ class Solution {
         for (int i = 1; i < left; i++) {
             prev = prev.next;
         }
-        System.out.println(prev.val);
         // curr = 2,3,4,5,6
         ListNode curr = prev.next;
         ListNode tail = curr;
