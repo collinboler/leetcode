@@ -18,10 +18,6 @@ class Solution {
         for (Character c : stack) {
             sb.append(c);
         }
-        return sb.toString();
-
-        
-        
-    
+        return sb.toString();    
 }
 }
