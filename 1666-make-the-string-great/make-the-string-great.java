@@ -1,23 +1,30 @@
 class Solution {
     public String makeGood(String s) {
-        Stack<Character> stack = new Stack<>();
-        if (s.length() == 0) return s;
-
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            if (!stack.isEmpty() && stack.peek() == Character.toUpperCase(c) && c != Character.toUpperCase(c)) {
-                stack.pop();
+   
+        StringBuilder newS = new StringBuilder(s);
+        
+        // if s has less than 2 characters, we just return itself.
+        while (newS.length() > 1) {
+            // 'find' records if we find any pair to remove.
+            boolean find = false;
+            
+            // Check every two adjacent characters, currChar and nextChar.
+            for (int i = 0; i < newS.length() - 1; ++i) {
+                char currChar = newS.charAt(i), nextChar = newS.charAt(i + 1);
+                
+                // If they make a pair, remove them from 's' and let 'find = true'.
+                if (Math.abs(currChar - nextChar) == 32) {
+                    newS.deleteCharAt(i);
+                    newS.deleteCharAt(i);
+                    find = true;
+                    break;
+                }
             }
-            else if (!stack.isEmpty() && stack.peek() == Character.toLowerCase(c) && c != Character.toLowerCase(c)) {
-                stack.pop();
-              
-            }
-            else stack.push(c);
+            
+            // If we cannot find any pair to remove, break the loop. 
+            if (!find)
+                break;
         }
-        StringBuilder sb = new StringBuilder();
-        for (Character c : stack) {
-            sb.append(c);
-        }
-        return sb.toString();    
-}
+        return newS.toString();
+    }
 }
