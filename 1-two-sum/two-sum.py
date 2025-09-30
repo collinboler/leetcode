@@ -5,15 +5,16 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-
         map = {}
+
         for i in range(len(nums)):
-            complement = target - nums[i];
-            if complement in map:
-                return [i, map[complement]]
-            else:
+            complement = target - nums[i]
+            if complement not in map:
                 map[nums[i]] = i
-        
-        
+            else:
+                return map[complement], i
+
+        return null
+
         
         
