@@ -1,9 +1,8 @@
 class MovingAverage {
-    Queue<Integer> queue;
+    Queue<Integer> queue = new LinkedList<>();
     int size;
     public MovingAverage(int size) {
         this.size = size;
-        this.queue = new LinkedList<>();
     }
     
     public double next(int val) {
