@@ -1,8 +1,7 @@
 class Solution {
-    int empty;
     public int numWaterBottles(int numBottles, int numExchange) {
         int count = numBottles;
-        empty = count;
+        int empty = count;
         
         while (empty >= numExchange ) {
             count += empty / numExchange;
