@@ -13,15 +13,9 @@ class Solution {
         }
         Arrays.sort(merged);
 
-     
-    
-
         if (merged.length % 2 != 0) return merged[merged.length / 2]; // odd
         return ((merged[merged.length/2 - 1] + merged[merged.length/2]) / 2.0); // even
-        
+
+        // done!
     }
-
-
-
-
 }
