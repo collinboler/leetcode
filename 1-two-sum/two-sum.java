@@ -14,7 +14,7 @@ class Solution {
                 result[1] = i;
                 return result;
             }
-            map.put(nums[i], i );
+            map.put(nums[i], i);
         }
          return result;
         }
