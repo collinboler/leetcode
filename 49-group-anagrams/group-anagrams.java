@@ -5,17 +5,17 @@ class Solution {
         return new String(charray);
     }
     public List<List<String>> groupAnagrams(String[] strs) {
-        HashMap<String, List<String>> map = new HashMap<>();
-        
+        HashMap<String, List<String>> map = new HashMap<>(); 
         for (String s : strs) {
-            if (map.containsKey(alpha(s))) {
+            String alphaS = alpha(s);
+            if (map.containsKey(alphaS)) {
                 // check for duplicate
-                map.get(alpha(s)).add(s); // add to the list in the hashmap
+                map.get(alphaS).add(s); // add to the list in the hashmap
             }
             else { // populate new list
                 List<String> list = new ArrayList<String>();
                 list.add(s);
-                map.put(alpha(s), list);
+                map.put(alphaS, list);
             }
         }
         List<List<String>> result = new ArrayList<List<String>>();
