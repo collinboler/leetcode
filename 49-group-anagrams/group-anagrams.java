@@ -1,9 +1,9 @@
 class Solution {
     private String alpha(String s) {
-        System.out.println("og string: " + s);
+        // System.out.println("og string: " + s);
         char[] charray = s.toCharArray();
         Arrays.sort(charray);
-        System.out.println("changed string: " + new String(charray));
+        // System.out.println("changed string: " + new String(charray));
 
         return new String(charray);
     }
