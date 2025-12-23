@@ -5,32 +5,31 @@
 #         self.next = next
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+         # Create min-heap to track smallest node from each list
         heap = []
-        for i, head in enumerate(lists):
-            if head:
-                heapq.heappush(heap, (head.val, i, head))
+        
+        # Add first node from each non-empty list to heap
+        # Use index to break ties for nodes with same value
+        for i, node in enumerate(lists):
+            if node:
+                heapq.heappush(heap, (node.val, i, node))
         
         # Create dummy head for result list
         dummy = ListNode(0)
         current = dummy
         
-        # Process nodes until heap is empty
+        # Process heap until empty
         while heap:
-            # Pop the smallest node from heap
-            val, list_idx, node = heapq.heappop(heap)
+            # Extract node with minimum value
+            val, i, node = heapq.heappop(heap)
             
-            # Add this node to result list
+            # Add to result list
             current.next = node
             current = current.next
             
-            # If this list has more nodes, add the next node to heap
+            # If extracted node has a next node, add it to heap
             if node.next:
-                heapq.heappush(heap, (node.next.val, list_idx, node.next))
+                heapq.heappush(heap, (node.next.val, i, node.next))
         
-        # Return the merged list (skip dummy head)
+        # Return merged list (skip dummy head)
         return dummy.next
-
-
-
-
-        
