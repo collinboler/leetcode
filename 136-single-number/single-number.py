@@ -7,7 +7,8 @@ class Solution:
                 hashset.add(num)
             else:
                 hashset.discard(num)
-        
-        return hashset.pop()
+        for i in hashset:
+            return i
+        # return hashset.pop()
 
         
