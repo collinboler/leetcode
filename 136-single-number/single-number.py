@@ -1,13 +1,13 @@
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
-        hashlist = []
+        hashset = set()
 
         for num in nums:
-            if num not in hashlist:
-                hashlist.append(num)
+            if num not in hashset:
+                hashset.add(num)
             else:
-                hashlist.remove(num)
+                hashset.discard(num)
         
-        return hashlist.pop()
+        return hashset.pop()
 
         
