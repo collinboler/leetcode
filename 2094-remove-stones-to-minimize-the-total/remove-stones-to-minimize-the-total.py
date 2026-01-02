@@ -9,7 +9,7 @@ class Solution:
             print(-pile)
             heapq.heappush(h, -pile)
         
-        print(h)
+
         result = 0
         for i in range(k):
             val = heapq.heappop(h)
