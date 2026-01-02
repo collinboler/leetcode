@@ -11,14 +11,10 @@ class Solution:
                 heapq.heappop(h)
         
         result = []
-        print(h)
-        print(map)
+
 
         for _, x, y in h:
-            arr = []
-            arr.append(x)
-            arr.append(y)
-            result.append(arr)
+            result.append([x,y])
 
         return result
     
