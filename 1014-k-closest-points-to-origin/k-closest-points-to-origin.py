@@ -1,7 +1,7 @@
 import heapq
 class Solution:
     def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
-        map = {}
+
 
         h = []
         for x, y in points:
@@ -11,7 +11,6 @@ class Solution:
                 heapq.heappop(h)
         
         result = []
-
 
         for _, x, y in h:
             result.append([x,y])
