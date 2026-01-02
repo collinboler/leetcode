@@ -6,7 +6,6 @@ class Solution:
         heapq.heapify(h)
 
         for pile in piles:
-            print(-pile)
             heapq.heappush(h, -pile)
         
 
