@@ -1,20 +1,14 @@
-class Solution(object):
-    def twoSum(self, nums, target):
-        """
-        :type nums: List[int]
-        :type target: int
-        :rtype: List[int]
-        """
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+
         map = {}
 
         for i in range(len(nums)):
             complement = target - nums[i]
-            if complement not in map:
-                map[nums[i]] = i
+            if complement in map:
+                return [i, map.get(complement)]
             else:
-                return map[complement], i
-
-        return null
-
+               
+                map[nums[i]] = i
         
-        
+        return []   
