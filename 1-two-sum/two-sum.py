@@ -8,5 +8,6 @@ class Solution:
                 return [i, map[complement]]
             map[nums[i]] = i
         
-        return 0
+        # (LeetDuck) Return [] since problem guarantees solution
+        return []
        
