@@ -1,15 +1,17 @@
 class Solution:
+    # (LeetDuck) Start loop and dictionary initialization here.
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        # (LeetDuck) Create hashmap: num -> index
-        seen = dict()
+        map = {}
 
         for i in range(len(nums)):
             complement = target - nums[i]
-            if complement in seen:
-                return[seen.get(complement), i]
-            seen[nums[i]] = i
+            if complement in map:
+                return [map[complement], i]
+            else:
+                map[nums[i]] = i
         
-        return[]
+        return
+        
          
         
         
