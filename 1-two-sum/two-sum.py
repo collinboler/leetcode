@@ -11,6 +11,9 @@ class Solution:
                 map[nums[i]] = i
         
         return
+
+        # confident with logic, not worried about edge cases
+        
         
          
         
