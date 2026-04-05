@@ -1,5 +1,4 @@
 class Solution:
-    # (LeetDuck) Start your implementation here.
     def judgeCircle(self, moves: str) -> bool:
         L = 0
         R = 0
