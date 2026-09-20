@@ -4,25 +4,18 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
+        
+        best = 0
+        numS = set(nums)
 
-        solution = 0
-
-        num_set = set(nums)
-
-        for num in num_set:
-            # beginning
-            if num - 1 not in num_set:
-                # intiate run
+        for num in numS:
+            if num - 1 not in numS:
                 curr = num
                 streak = 1
 
-                while curr + 1 in num_set:
+                while curr + 1 in numS:
                     curr += 1
                     streak += 1
-                
-                solution = max(solution, streak)
+                best = max(best, streak)
         
-        return solution
-
-
-        
+        return best
