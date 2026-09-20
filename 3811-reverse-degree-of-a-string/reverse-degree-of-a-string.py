@@ -9,7 +9,6 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        # (LeetDuck) Use a qualified reference to the class helper here.
         solution = 0
         for i, c in enumerate(s):
             solution = solution + self.getScore(i, c)
