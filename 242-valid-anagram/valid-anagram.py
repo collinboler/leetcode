@@ -5,46 +5,34 @@ class Solution(object):
         :type t: str
         :rtype: bool
         """
+        # lengths unequal
         if len(s) != len(t):
             return False
-        
-        chars = {}
-        
-        for i in s:
-            if i in chars:
-                chars[i] += 1
-            else:
-                chars[i] = 1
 
-        for j in t:
-            if j in chars:
-                chars[j] -= 1
+        # store chars in first string
+        sMap = {}
+        for char in s:
+            if char in sMap:
+                sMap[char] = sMap[char] + 1
             else:
-                return False
-                       
-        for c in chars:
-            if chars[c] != 0:
+                sMap[char] = 1
+
+        # check against second string
+        for char in t:
+            if char in sMap:
+                if (sMap[char] > 1):
+                    sMap[char] = sMap[char] - 1
+                else:
+                    del sMap[char]
+            else:
                 return False
         
         return True
-        # if len(s) != len(t):
-        #     return False
-        # m = {}
-        # for i in range(len(s)):
-        #     if s[i] not in m:
-        #         m[s[i]] = 1
-        #     else:
-        #         m[s[i]] = m.get(s[i]) + 1
+                
+
+
         
-        # for j in range(len(t)):
-        #     if t[j] not in m:
-        #         return False
-        #     elif m.get(t[j]) > 1:
-        #         m[t[j]] = m.get(t[j]) - 1
-        #     else:
-        #         del m[t[j]]
-        
-        # # return True
+       
 
 
 
