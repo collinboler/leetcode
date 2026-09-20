@@ -1,33 +1,28 @@
 class Solution(object):
-
-    def sortStr(self, string):
-        return ''.join(sorted(string))
+    def getKey(self, string):
+        return "".join(sorted(string))
 
     def groupAnagrams(self, strs):
         """
         :type strs: List[str]
         :rtype: List[List[str]]
         """
-        hashmap = {} # of string and stacks
+        anagrams = {}
         for string in strs:
-            sortd = self.sortStr(string)
-            if sortd not in hashmap:
-                set = []
-                set.append(string)
-                hashmap[sortd] = set
+            key = self.getKey(string)
+            if key in anagrams:
+                anagrams[key].append(string)
             else:
-                hashmap[sortd].append(string)
+                anagrams[key] = [string]
+        solution = []
+        for val in anagrams.values():
+            solution.append(val)
         
-        result = []
-        for _, value in hashmap.items():
-            result.append(value)
-        
-        return result
+        return solution
 
 
 
 
-            
 
 
         
