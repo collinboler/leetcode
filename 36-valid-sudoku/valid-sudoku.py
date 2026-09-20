@@ -45,25 +45,25 @@ class Solution(object):
             rowSeen = set()
             # go through col in row x
             for columnIndex, columnVal in enumerate(rowVal):
-                if columnVal != ".":
-                    # column check
-                    if columnVal in columns[columnIndex]:
-                        return False
-                    columns[columnIndex].add(columnVal)
+                if columnVal == ".":
+                    continue
+            # column check
+                elif columnVal in columns[columnIndex]:
+                    return False
+                columns[columnIndex].add(columnVal)
 
-                    # grid check
-                    gridIndex = self.whichGrid(rowIndex, columnIndex)
-                    if columnVal in grids[gridIndex]:
+                # grid check
+                gridIndex = self.whichGrid(rowIndex, columnIndex)
+                if columnVal in grids[gridIndex]:
 
-                        return False
-                    grids[gridIndex].add(columnVal)
+                    return False
+                grids[gridIndex].add(columnVal)
 
-                    # row check
-                    if columnVal in rowSeen:
-                        return False
-                    else:
-                        rowSeen.add(columnVal)
-        
+                # row check
+                if columnVal in rowSeen:
+                    return False
+                else:
+                    rowSeen.add(columnVal)
         return True
                 
                     
