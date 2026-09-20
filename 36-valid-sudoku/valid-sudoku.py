@@ -48,26 +48,18 @@ class Solution(object):
                 if columnVal != ".":
                     # column check
                     if columnVal in columns[columnIndex]:
-                        print("column case:")
-                        print(columns)
                         return False
                     columns[columnIndex].add(columnVal)
 
                     # grid check
                     gridIndex = self.whichGrid(rowIndex, columnIndex)
                     if columnVal in grids[gridIndex]:
-                        print(gridIndex)
-                        print(columnVal)
-                        print(rowIndex)
-                        print(columnIndex)
-                        print("grid case:")
-                        print(grids)
+
                         return False
                     grids[gridIndex].add(columnVal)
 
                     # row check
                     if columnVal in rowSeen:
-                        print("row case: {rowSeen}")
                         return False
                     else:
                         rowSeen.add(columnVal)
