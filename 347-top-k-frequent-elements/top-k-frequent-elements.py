@@ -13,8 +13,7 @@ class Solution(object):
                 c[num] = 1
             else:
                 c[num] += 1
-        print(c)
-        print(c.most_common(k))
+
         topK = c.most_common(k)
         solution = []
         for item, _ in topK:
