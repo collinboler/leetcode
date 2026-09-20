@@ -4,29 +4,22 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
-        length = len(nums)
-        left, right, result = length * [0], length * [0], length * [0]
 
-        # prefix sum
-        # prefix = [nums[0]]
-        # for i in range(1, len(nums)):
-        #     prefix.append(prefix[i - 1] + nums[i])
-        
-        # left 
+        right, left, solution = [0] * len(nums), [0] * len(nums), [0] * len(nums)
+
+        # start with left
         left[0] = 1
+        for i in range(1, len(nums)):
+            left[i] = left[i - 1] * nums[i - 1]
+        # then right
+        right[len(nums) - 1] = 1
 
-        for i in range(1, length):
-            left[i] = (left[i - 1] * nums[i - 1])
-
-        # right
-        right[length - 1] = 1
-
-        for i in reversed(range(length - 1)):
-            right[i] = (right[i + 1] * nums[i + 1])
+        for i in reversed(range(len(nums) - 1)):
+            right[i] = right[i + 1] * nums[i + 1]
         
-        for i in range(length):
-            result[i] = right[i] * left[i]
-
-        return result
+        for i, _ in enumerate(nums):
+            solution[i] = left[i] * right[i]
         
+        return solution
+
         
