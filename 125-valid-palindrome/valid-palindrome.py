@@ -3,9 +3,7 @@ class Solution(object):
         """
         :type s: str
         :rtype: bool
-        """
-        
-        # remove invalid characters        
+        """      
         left, right = 0, len(s) - 1
 
         while left < right:
