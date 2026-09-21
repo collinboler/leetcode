@@ -5,20 +5,21 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        # i = len(numbers) - 1
-        # while (numbers[i] > target):
-        #     numbers.pop()
-        #     i -= 1
+        # for num in reversed(numbers):
+        #     if num > target:
+        #         numbers.pop()
         
         left, right = 0, len(numbers) - 1
 
-        while left < right:
+        while (left < right):
             twoSum = numbers[left] + numbers[right]
             if twoSum == target:
                 return [left + 1, right + 1]
-            elif twoSum < target:
-                left += 1
             elif twoSum > target:
                 right -= 1
+            else:
+                left += 1
+        
         return []
+
         
