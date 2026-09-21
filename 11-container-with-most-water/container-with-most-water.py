@@ -24,7 +24,7 @@ class Solution(object):
             area = self.area(left, right, height)
             best = max(best, area)
 
-            if height[left] <= height[right]:
+            if height[left] < height[right]:
                 left += 1
             else:
                 right -= 1
