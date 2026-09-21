@@ -6,7 +6,7 @@ class Solution(object):
         """
         letters = []        
         for c in s:
-            if c.isalpha() or c.isdigit():
+            if c.isalnum():
                 letters.append(c.lower())
 
         if len(letters) % 2 == 0:
