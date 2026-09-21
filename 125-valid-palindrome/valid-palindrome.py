@@ -1,26 +1,18 @@
-class Solution(object):
-    def isPalindrome(self, s):
-        """
-        :type s: str
-        :rtype: bool
-        """
-        letters = []        
-        for c in s:
-            if c.isalpha() or c.isdigit():
-                letters.append(c.lower())
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
 
-        if len(letters) % 2 == 0:
-            right = len(letters) - 1
-            for left in range(len(letters) / 2):
-                if letters[right] != letters[left]:
-                    return False
-                right -= 1
-            return True
-        
-        else:
-            right = len(letters) - 1
-            for left in range(len(letters) // 2):
-                if letters[right] != letters[left]:
-                    return False
-                right -= 1
-            return True
+        i, j = 0, len(s) - 1
+
+        while i < j:
+            while i < j and not s[i].isalnum():
+                i += 1
+            while i < j and not s[j].isalnum():
+                j -= 1
+
+            if s[i].lower() != s[j].lower():
+                return False
+
+            i += 1
+            j -= 1
+
+        return True
