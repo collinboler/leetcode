@@ -9,8 +9,8 @@ class Solution(object):
         left, right = 0, len(s) - 1
 
         while left < right:
-            print("left: %s, right: %s" % (left,right))
-            print("left: %s, right: %s" % (s[left],s[right]))
+            # print("left: %s, right: %s" % (left,right))
+            # print("left: %s, right: %s" % (s[left],s[right]))
 
             if not s[left].isalnum():
                 left += 1
