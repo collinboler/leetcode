@@ -10,8 +10,7 @@ class Solution(object):
         for c in s:
             if c.isalpha() or c.isdigit():
                 letters.append(c.lower())
-        
-        print(letters)
+
         if len(letters) % 2 == 0:
             right = len(letters) - 1
             for left in range(len(letters) / 2):
