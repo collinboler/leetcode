@@ -4,9 +4,7 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
-        letters = []
-        # handle stupid edge case:
-        
+        letters = []        
         for c in s:
             if c.isalpha() or c.isdigit():
                 letters.append(c.lower())
