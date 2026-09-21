@@ -11,7 +11,8 @@ class Solution(object):
         for i, num in enumerate(prices):
             if num < min_price:
                 min_price = num
-            elif num - min_price > best:
-                best = num - min_price
+            best = max(num - min_price, best)
+            # elif num - min_price > best:
+            #     best = num - min_price
         
         return best
