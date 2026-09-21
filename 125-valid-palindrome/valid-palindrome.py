@@ -14,7 +14,6 @@ class Solution(object):
         if len(letters) % 2 == 0:
             right = len(letters) - 1
             for left in range(len(letters) / 2):
-
                 if letters[right] != letters[left]:
                     return False
                 right -= 1
