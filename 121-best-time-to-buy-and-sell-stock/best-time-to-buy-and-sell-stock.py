@@ -4,15 +4,23 @@ class Solution(object):
         :type prices: List[int]
         :rtype: int
         """
+        # goal: greatest right - left differential
+        # find min 
+        minPrice = float('inf')
+        maxProfit = 0 
+        for price in prices:
+            if price < minPrice:
+                minPrice = price
+            if price - minPrice > maxProfit:
+                maxProfit = price - minPrice
         
-        min_price = float("inf")
-        best = 0
+        return maxProfit
 
-        for i, num in enumerate(prices):
-            if num < min_price:
-                min_price = num
-            # best = max(num - min_price, best)
-            elif num - min_price > best:
-                best = num - min_price
         
-        return best
+
+
+
+
+
+
+        
