@@ -4,14 +4,13 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
-        
 
         stack = []
 
         pairs = {
             ')' : '(',
             ']' : '[',
-            '}' : '{' 
+            '}' : '{'
         }
 
         for c in s:
@@ -23,6 +22,7 @@ class Solution(object):
                 return False
             else:
                 stack.pop()
-        if stack:
-            return False
-        return True
+        
+        return not stack
+
+        
