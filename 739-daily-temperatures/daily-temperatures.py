@@ -9,12 +9,12 @@ class Solution(object):
         stack = []
         solution = []
         for i, temp in enumerate(temperatures):
-            while stack and temp > stack[-1][0]: # temp >
-                solution[stack[-1][1]] = i - stack[-1][1]
+            while stack and temp > temperatures[stack[-1]]: # temp >
+                solution[stack[-1]] = i - stack[-1]
                 stack.pop()
                 if not stack:
                     break
-            stack.append((temp, i))
+            stack.append(i)
             solution.append(0)
         return solution
             
