@@ -12,8 +12,6 @@ class Solution(object):
             while stack and temp > temperatures[stack[-1]]: # temp >
                 solution[stack[-1]] = i - stack[-1]
                 stack.pop()
-                if not stack:
-                    break
             stack.append(i)
             solution.append(0)
         return solution
