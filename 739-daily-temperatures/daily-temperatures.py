@@ -1,4 +1,3 @@
-import heapq
 class Solution(object):
     def dailyTemperatures(self, temperatures):
         """
