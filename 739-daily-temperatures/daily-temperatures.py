@@ -6,13 +6,12 @@ class Solution(object):
         """
         # length = len(temperatures) - 1
         stack = []
-        solution = []
+        solution = [0] * len(temperatures)
         for i, temp in enumerate(temperatures):
             while stack and temp > temperatures[stack[-1]]: # temp >
                 solution[stack[-1]] = i - stack[-1]
                 stack.pop()
             stack.append(i)
-            solution.append(0)
         return solution
             
             
