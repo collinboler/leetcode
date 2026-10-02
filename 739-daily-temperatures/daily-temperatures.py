@@ -4,8 +4,9 @@ class Solution(object):
         :type temperatures: List[int]
         :rtype: List[int]
         """
+        n = len(temperatures)
         stack = []
-        result = [0] * len(temperatures)
+        result = [0] * n
         for i, temp in enumerate(temperatures):
             if stack:
                 while stack and stack[-1][0] < temp:
