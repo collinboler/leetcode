@@ -19,10 +19,8 @@ class Solution(object):
             mid = (left + right) // 2
             if nums[mid + 1] < nums[mid]:
                 return nums[mid + 1]
-            if nums[mid - 1] > nums[mid]:
-                return nums[mid]
-
-
+            # if nums[mid - 1] > nums[mid]:
+            #     return nums[mid]
             # on left
             if nums[mid] >= nums[0]:
                 left = mid + 1
