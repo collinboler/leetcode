@@ -9,9 +9,9 @@ class Solution(object):
         result = [0] * n
         for i, temp in enumerate(temperatures):
             if stack:
-                while stack and stack[-1][0] < temp:
-                    _, index = stack.pop()
+                while stack and temperatures[stack[-1]] < temp:
+                    index = stack.pop()
                     result[index] = i - index
-            stack.append((temp, i))
+            stack.append(i)
             # store temp and i val
         return result
