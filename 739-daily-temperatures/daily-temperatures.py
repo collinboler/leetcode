@@ -4,14 +4,14 @@ class Solution(object):
         :type temperatures: List[int]
         :rtype: List[int]
         """
-        # length = len(temperatures) - 1
         stack = []
-        solution = [0] * len(temperatures)
+        result = []
         for i, temp in enumerate(temperatures):
-            while stack and temp > temperatures[stack[-1]]: # temp >
-                solution[stack[-1]] = i - stack[-1]
-                stack.pop()
-            stack.append(i)
-        return solution
-            
-            
+            if stack:
+                while stack and stack[-1][0] < temp:
+                    _, index = stack.pop()
+                    result[index] = i - index
+            result.append(0)
+            stack.append((temp, i))
+            # store temp and i val
+        return result
