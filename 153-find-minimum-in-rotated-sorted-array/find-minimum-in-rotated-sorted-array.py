@@ -12,12 +12,10 @@ class Solution(object):
         left, right = 0, n
         if nums[right] > nums[left]:
             return nums[left]
-
  
         # find jump
         while left <= right:
             # mid = (left + right) // 2# make sure doesn't overflow
-
             mid = (left + right) // 2
             if nums[mid + 1] < nums[mid]:
                 return nums[mid + 1]
