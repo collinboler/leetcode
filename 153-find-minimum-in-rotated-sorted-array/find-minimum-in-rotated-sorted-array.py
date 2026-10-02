@@ -5,8 +5,7 @@ class Solution(object):
         :rtype: int
         """
         
-        n = len(nums) - 1
-        if n == 0:
+        if len(nums) == 1:
             return nums[0]
 
         left, right = 0, len(nums) - 1
