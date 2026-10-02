@@ -19,9 +19,6 @@ class Solution(object):
             # mid = (left + right) // 2# make sure doesn't overflow
 
             mid = (left + right) // 2
-            print(f"left: {left}, right: {right}")
-            print("mid: ", nums[mid])
-
             if nums[mid + 1] < nums[mid]:
                 return nums[mid + 1]
             if nums[mid - 1] > nums[mid]:
