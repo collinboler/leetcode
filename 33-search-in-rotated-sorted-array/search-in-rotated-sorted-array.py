@@ -32,17 +32,17 @@ class Solution:
     def search(self, nums: list[int], target: int) -> int:
         minI, maxI = self.findMinMax(nums) 
         # then do binary search on the two split arrays
-        print("minI: ", minI, "maxI: ", maxI)
+
         if minI < maxI:
-            print("special")
+
             return self.binarySearch(nums, 0, len(nums) - 1, target)
 
         if nums[0] <= target:
-            print("hi1")
+
             
             left, right = 0, minI
         else:
-            print("hi2")
+
             left, right = minI, len(nums) - 1
         
         return self.binarySearch(nums, left, right, target)
