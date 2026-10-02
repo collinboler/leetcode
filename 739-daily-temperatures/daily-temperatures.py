@@ -5,13 +5,12 @@ class Solution(object):
         :rtype: List[int]
         """
         stack = []
-        result = []
+        result = [0] * len(temperatures)
         for i, temp in enumerate(temperatures):
             if stack:
                 while stack and stack[-1][0] < temp:
                     _, index = stack.pop()
                     result[index] = i - index
-            result.append(0)
             stack.append((temp, i))
             # store temp and i val
         return result
