@@ -28,11 +28,11 @@ class LRUCache:
         # add key-val to cache
         
         while len(self.map) > self.capacity:
-            # if cache key's current version != cache key's version
             oldkey, oldversion = self.cache.popleft()
             if oldversion != self.version[oldkey]:
                 continue # skip
-            del self.map[oldkey] # two birds one stone again
+            del self.map[oldkey]
+            del self.version[oldkey]
     
         
 
