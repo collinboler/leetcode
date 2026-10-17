@@ -3,7 +3,7 @@ class LRUCache:
 
     def __init__(self, capacity: int):
         self.capacity = capacity
-        self.version = {}
+        # self.version = {}
         self.map = {}
         self.cache = deque()
         
@@ -11,26 +11,23 @@ class LRUCache:
         # return -1 or 1 update cache, get key
         if key not in self.map:
             return -1
-        self.version[key] += 1
-        self.cache.append((key, self.version[key]))
-        return self.map[key]
+        self.map[key] = (self.map[key][0], self.map[key][1] + 1)
+        self.cache.append((key, self.map[key][1]))
+        return self.map[key][0]
 
     def put(self, key: int, value: int) -> None:
         if key not in self.map:
-            self.version[key] = 1
-            self.map[key] = value
+            self.map[key] = (value, 1)
             self.cache.append((key, 1))
         else:
-            self.version[key] += 1
-            self.map[key] = value
-            self.cache.append((key, self.version[key]))
+            self.map[key] = (value, self.map[key][1] + 1)
+            self.cache.append((key, self.map[key][1]))
         
         while len(self.map) > self.capacity:
             k, v = self.cache.popleft()
-            if v != self.version[k]:
+            if v != self.map[k][1]:
                 continue
             del self.map[k]
-            del self.version[k]
         
             
 
