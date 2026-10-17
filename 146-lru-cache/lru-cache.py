@@ -1,66 +1,41 @@
-class Node:
-    __slots__ = ("key", "val", "prev", "next")
-    def __init__(self, key: int, val:int):
-        self.key = key
-        self.val = val
-        self.prev = None
-        self.next = None
-
-class LRUCache:
+from collections import deque
+class LRUCache: 
     def __init__(self, capacity: int):
-        self.cap = capacity
-        self.map = {} #key --> Node
-
-        # dummy head/tail to avoid edge cases
-        self.head = Node(0,0)
-        self.tail = Node(0,0)
-        self.head.next = self.tail
-        self.tail.prev = self.head
-    
-    def _remove(self, node: Node) -> None:
-        """Remove node from the doubly linked list."""
-        p, n = node.prev, node.next
-        p.next = n
-        n.prev = p
-    
-    def _add_to_front(self, node: Node) -> None:
-        """Insert node right after head (mark as MRU)."""
-        first = self.head.next
-        node.prev = self.head
-        node.next = first
-        self.head.next = node
-        first.prev = node
-
+        self.capacity = capacity
+        self.map = {}
+        self.cache = deque()
+        self.version = {}
+ 
     def get(self, key: int) -> int:
         if key not in self.map:
             return -1
-        node = self.map[key]
-        # move to front (MRU)
-        self._remove(node)
-        self._add_to_front(node)
-        return node.val
+        self.version[key] += 1
+        self.cache.append((key, self.version[key]))
+        return self.map[key]
 
     def put(self, key: int, value: int) -> None:
-        if key in self.map:
-            node = self.map[key]
-            node.val = value
-            # move to front (MRU)
-            self._remove(node)
-            self._add_to_front(node)
-            return
+        # if not exist, add to map (val, version) and cache (key)
+        if key not in self.map:
+            self.map[key] = value 
+            self.version[key] = 1
+            self.cache.append((key, 1))
+        else:
+            # increment version
+            self.map[key] = value
+            self.version[key] += 1
+            self.cache.append((key, self.version[key]))
+            
+        # add key-val to cache
         
-        # new key
-        node = Node(key, value)
-        self.map[key] = node
-        self._add_to_front(node)
-
-        if len(self.map) > self.cap:
-            # evict LRU (node before tail)
-            lru = self.tail.prev
-            self._remove(lru)
-            del self.map[lru.key]
+        while len(self.map) > self.capacity:
+            # if cache key's current version != cache key's version
+            oldkey, oldversion = self.cache.popleft()
+            if oldversion != self.version[oldkey]:
+                print(f"{oldversion} & {self.version[oldkey]}")
+                continue # skip
+            del self.map[oldkey] # two birds one stone again
+    
         
-
 
 # Your LRUCache object will be instantiated and called as such:
 # obj = LRUCache(capacity)
