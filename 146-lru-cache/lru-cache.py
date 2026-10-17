@@ -1,12 +1,14 @@
 from collections import deque
-class LRUCache: 
+class LRUCache:
+
     def __init__(self, capacity: int):
         self.capacity = capacity
+        self.version = {}
         self.map = {}
         self.cache = deque()
-        self.version = {}
- 
+        
     def get(self, key: int) -> int:
+        # return -1 or 1 update cache, get key
         if key not in self.map:
             return -1
         self.version[key] += 1
@@ -14,27 +16,27 @@ class LRUCache:
         return self.map[key]
 
     def put(self, key: int, value: int) -> None:
-        # if not exist, add to map (val, version) and cache (key)
         if key not in self.map:
-            self.map[key] = value 
             self.version[key] = 1
+            self.map[key] = value
             self.cache.append((key, 1))
         else:
-            # increment version
-            self.map[key] = value
             self.version[key] += 1
+            self.map[key] = value
             self.cache.append((key, self.version[key]))
-            
-        # add key-val to cache
         
         while len(self.map) > self.capacity:
-            oldkey, oldversion = self.cache.popleft()
-            if oldversion != self.version[oldkey]:
-                continue # skip
-            del self.map[oldkey]
-            del self.version[oldkey]
-    
+            k, v = self.cache.popleft()
+            if v != self.version[k]:
+                continue
+            del self.map[k]
+            del self.version[k]
         
+            
+
+
+        
+
 
 # Your LRUCache object will be instantiated and called as such:
 # obj = LRUCache(capacity)
