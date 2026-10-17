@@ -31,7 +31,6 @@ class LRUCache:
             # if cache key's current version != cache key's version
             oldkey, oldversion = self.cache.popleft()
             if oldversion != self.version[oldkey]:
-                print(f"{oldversion} & {self.version[oldkey]}")
                 continue # skip
             del self.map[oldkey] # two birds one stone again
     
